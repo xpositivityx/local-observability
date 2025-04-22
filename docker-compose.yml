@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  obs:
+    build:
+      args:
+        USER: $USER
+      context: .
+      dockerfile: Dockerfile.dev
+    # env_file:
+    #   - env/docker.env
+    volumes:
+      - ./:/app
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=jaeger:4317
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/obs_dev?sslmode=disable
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: obs_dev
+      POSTGRES_USER: postgres
+    volumes:
+      - ./_db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # jaeger-query
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - COLLECTOR_OTLP_ENABLED=true
+    volumes:
+      - ./_jaeger_data:/var/lib/jaeger

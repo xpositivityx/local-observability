@@ -1,0 +1,8 @@
+version: '3'
+services:
+  obs:
+    user: $USER
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
+ 

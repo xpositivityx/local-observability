@@ -1,0 +1,22 @@
+FROM golang:1.24.1-bookworm
+
+ARG USER=default
+ENV HOME /home/$USER
+
+RUN apt update && apt install -y git sudo jq inotify-tools
+
+RUN adduser --disabled-password --shell /bin/bash $USER \
+    && passwd -d $USER \
+    && groupadd docker \
+    && usermod -aG docker $USER \
+    && usermod -aG sudo $USER
+
+RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.2/migrate.linux-amd64.tar.gz | tar xvz \
+    && mv migrate /usr/local/bin/
+
+USER $USER
+
+RUN go install github.com/air-verse/air@latest
+RUN go install github.com/mfridman/tparse@latest
+
+WORKDIR /app

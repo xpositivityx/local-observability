@@ -1,0 +1,5 @@
+_db_data/
+tmp/
+bin/
+env/
+_jaeger_data/
