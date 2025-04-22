@@ -1,4 +1,4 @@
-module github.com/xpositivityx/obs-test
+module github.com/xpositivityx/local-observability
 
 go 1.24.1
 

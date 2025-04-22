@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/xpositivityx/obs-test/pkg/observeme"
-	"github.com/xpositivityx/obs-test/pkg/tracing"
+	"github.com/xpositivityx/local-observability/pkg/observeme"
+	"github.com/xpositivityx/local-observability/pkg/tracing"
 )
 
 func TestMain(m *testing.M) {

@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/rs/cors"
-	"github.com/xpositivityx/obs-test/pkg/db"
-	"github.com/xpositivityx/obs-test/pkg/tracing"
+	"github.com/xpositivityx/local-observability/pkg/db"
+	"github.com/xpositivityx/local-observability/pkg/tracing"
 )
 
 func main() {
